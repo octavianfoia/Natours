@@ -1,0 +1,92 @@
+.story {
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba($color-black, 0.1);
+  background-color: rgba($color-white, 0.6);
+  border-radius: 3px;
+  padding: 6rem;
+  padding-left: 9rem;
+  font-size: $default-font-size;
+
+  transform: skewX(-12deg);
+
+  //Skews all direct childs of the section, where as skew on those elements themselves will dissapear if classes (section name of boxes names) are changed
+  & > * {
+    transform: skewX(12deg);
+  }
+
+  @include respond(tab-port) {
+    width: 100%;
+    padding: 4rem;
+    padding-left: 7rem;
+  }
+
+  @include respond(phone) {
+    transform: skewX(0);
+  }
+
+  &__shape {
+    width: 15rem;
+    height: 15rem;
+    position: relative;
+
+    float: left;
+
+    //shape-outside: radius of circle-of the element, position
+    -webkit-shape-outside: circle(50% at 50% 50%);
+    //shape-outside only works if the element has defined dimensions (width and height)
+    shape-outside: circle(50% at 50% 50%);
+    -webkit-clip-path: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+    transform: translateX(-3rem) skewX(12deg);
+    //This transform has precedence over
+    //the skew transform (L11), so the shape is moved to the left
+    //if no skewX added here (L30).
+
+    @include respond(phone) {
+      transform: translateX(-3rem) skewX(0);
+    }
+  }
+
+  &__img {
+    height: 100%;
+    transform: translateX(-4rem) scale(1.4);
+    backface-visibility: hidden;
+    transition: all 0.5s;
+  }
+
+  &__text {
+    transform: skewX(12deg);
+    backface-visibility: hidden;
+
+    @include respond(phone) {
+      transform: skewX(0);
+    }
+  }
+
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    color: $color-grey-light-1;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.5s;
+    backface-visibility: hidden;
+  }
+
+  &:hover &__caption {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    backface-visibility: hidden;
+  }
+
+  &:hover &__img {
+    transform: translateX(-4rem) scale(1);
+    backface-visibility: hidden;
+    filter: blur(3px) brightness(85%);
+  }
+}

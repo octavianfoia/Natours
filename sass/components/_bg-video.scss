@@ -1,0 +1,19 @@
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.15; //of the video
+  z-index: -1;
+  //bg-color must be removed from section so video
+  //doesnt overflow
+  overflow: hidden;
+
+  &__content {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; //similar to background-size:cover
+    //content will fill entire parent while maintaining its ratio
+  }
+}
